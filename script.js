@@ -15,3 +15,14 @@ function createGrid() {
 }
 
 createGrid();
+
+function addColor(gridCell) {
+  gridCell.setAttribute("style", "background-color: black");
+}
+
+const gridCells = document.querySelectorAll(".grid-cell");
+gridCells.forEach((gridCell) => {
+  gridCell.addEventListener("mouseover", () => {
+    addColor(gridCell);
+  });
+});
