@@ -41,6 +41,11 @@ button:hover {
   box-shadow: inset 147px 0 0 0 #34d69a;
 }
 
+.button-fill {
+  background-color: #34d69a;
+  box-shadow: inset 147px 0 0 0 #34d69a;
+}
+
 .slider-text {
   color: white;
 }

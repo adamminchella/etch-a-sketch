@@ -14,19 +14,28 @@ let rows = 16;
 size.addEventListener("input", changeGridSize);
 reloadButton.addEventListener("click", reloadGrid);
 rainbowButton.addEventListener("click", () => {
+  colorButton(rainbowButton, fillButton, shadowButton, eraserButton);
   mode = "rainbow";
 });
 fillButton.addEventListener("click", () => {
+  colorButton(fillButton, rainbowButton, shadowButton, eraserButton);
   mode = "fill";
 });
 shadowButton.addEventListener("click", () => {
+  colorButton(shadowButton, rainbowButton, fillButton, eraserButton);
   mode = "shadow";
 });
 eraserButton.addEventListener("click", () => {
+  colorButton(eraserButton, rainbowButton, fillButton, shadowButton);
   mode = "erase";
 });
 
 colorPicker.addEventListener("click", chooseColor);
+
+function colorButton(buttonFill, ...buttonEmpty) {
+  buttonFill.classList.add("button-fill");
+  buttonEmpty.forEach((button) => button.classList.remove("button-fill"));
+}
 
 // HTML color picker returns a HEX value which must be converted to RGB format in order to apply shadow function
 function chooseColor() {
