@@ -6,7 +6,7 @@ const rainbowButton = document.querySelector(".rainbow");
 const shadowButton = document.querySelector(".shadow");
 const size = document.querySelector(".slider");
 const sizeInfo = document.querySelector(".slider-text");
-let mode = "shadow";
+let mode = "fill";
 let rows = 16;
 
 size.addEventListener("input", changeGridSize);
@@ -54,15 +54,12 @@ function configureGridCells() {
 
 function addColor(e) {
   if (mode === "fill") {
-    gridCell.setAttribute("style", "background-color: black");
+    e.target.style.backgroundColor = `rgb(0, 0, 0)`;
   } else if (mode === "rainbow") {
     randomR = Math.floor(Math.random() * 256);
     randomG = Math.floor(Math.random() * 256);
     randomB = Math.floor(Math.random() * 256);
-    gridCell.setAttribute(
-      "style",
-      `background-color: rgb(${randomR}, ${randomG}, ${randomB}`
-    );
+    e.target.style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB}`;
   } else if (mode === "shadow") {
     if (e.target.style.backgroundColor === `rgb(0, 0, 0)`) {
       return;
