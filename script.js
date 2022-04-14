@@ -31,7 +31,7 @@ function chooseColor() {
   let R = parseInt(userColorRGB[0], 16);
   let G = parseInt(userColorRGB[1], 16);
   let B = parseInt(userColorRGB[2], 16);
-  return `${R}, ${B}, ${G}`;
+  return `${R}, ${G}, ${B}`;
 }
 
 function changeGridSize() {
