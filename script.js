@@ -66,32 +66,45 @@ function configureGridCells() {
   const gridCells = document.querySelectorAll(".grid-cell");
   gridCells.forEach((gridCell) => {
     gridCell.addEventListener("mouseover", addColor);
+    gridCell.addEventListener("mousedown", addColor);
   });
 }
 
+let mouseDown = false;
+grid.addEventListener("mousedown", () => {
+  mouseDown = true;
+});
+window.addEventListener("mouseup", () => {
+  if (mouseDown === true) {
+    mouseDown = false;
+  }
+});
+
 function addColor(e) {
-  if (mode === "fill") {
-    e.target.style.backgroundColor = `rgb(${chooseColor()})`;
-  } else if (mode === "rainbow") {
-    randomR = Math.floor(Math.random() * 256);
-    randomG = Math.floor(Math.random() * 256);
-    randomB = Math.floor(Math.random() * 256);
-    e.target.style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB}`;
-  } else if (mode === "shadow") {
-    if (e.target.style.backgroundColor === `rgb(${chooseColor()})`) {
-      return;
-    }
-    if (e.target.style.backgroundColor.includes("rgba")) {
-      let currentShade = Number(e.target.style.backgroundColor.slice(-4, -1));
-      if (currentShade <= 0.9) {
-        currentShade = (currentShade * 10 + 1) / 10;
-        e.target.style.backgroundColor = `rgba(${chooseColor()}, ${currentShade}`;
+  if (e.type === "mousedown" || (e.type === "mouseover" && mouseDown)) {
+    if (mode === "fill") {
+      e.target.style.backgroundColor = `rgb(${chooseColor()})`;
+    } else if (mode === "rainbow") {
+      randomR = Math.floor(Math.random() * 256);
+      randomG = Math.floor(Math.random() * 256);
+      randomB = Math.floor(Math.random() * 256);
+      e.target.style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB}`;
+    } else if (mode === "shadow") {
+      if (e.target.style.backgroundColor === `rgb(${chooseColor()})`) {
+        return;
       }
-    } else {
-      e.target.style.backgroundColor = `rgba(${chooseColor()}, 0.1)`;
+      if (e.target.style.backgroundColor.includes("rgba")) {
+        let currentShade = Number(e.target.style.backgroundColor.slice(-4, -1));
+        if (currentShade <= 0.9) {
+          currentShade = (currentShade * 10 + 1) / 10;
+          e.target.style.backgroundColor = `rgba(${chooseColor()}, ${currentShade}`;
+        }
+      } else {
+        e.target.style.backgroundColor = `rgba(${chooseColor()}, 0.1)`;
+      }
+    } else if (mode === "erase") {
+      e.target.style.backgroundColor = `rgb(255, 255, 255)`;
     }
-  } else if (mode === "erase") {
-    e.target.style.backgroundColor = `rgb(255, 255, 255)`;
   }
 }
 
