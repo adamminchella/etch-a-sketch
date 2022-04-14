@@ -8,7 +8,7 @@ const shadowButton = document.querySelector(".shadow");
 const eraserButton = document.querySelector(".eraser");
 const size = document.querySelector(".slider");
 const sizeInfo = document.querySelector(".slider-text");
-let mode = "fill";
+let mode = "none";
 let rows = 16;
 
 size.addEventListener("input", changeGridSize);
@@ -35,6 +35,7 @@ colorPicker.addEventListener("click", chooseColor);
 function colorButton(buttonFill, ...buttonEmpty) {
   buttonFill.classList.add("button-fill");
   buttonEmpty.forEach((button) => button.classList.remove("button-fill"));
+  mouseClicked = false;
 }
 
 // HTML color picker returns a HEX value which must be converted to RGB format in order to apply shadow function
@@ -55,6 +56,7 @@ function changeGridSize() {
 function reloadGrid() {
   clearGrid();
   createGrid();
+  mouseClicked = false;
 }
 
 function clearGrid() {
@@ -81,6 +83,9 @@ function configureGridCells() {
 
 let mouseClicked = false;
 grid.addEventListener("mousedown", () => {
+  if (mode === "none") {
+    return;
+  }
   if (mouseClicked === false) {
     mouseClicked = true;
   } else if (mouseClicked === true) {
@@ -89,6 +94,9 @@ grid.addEventListener("mousedown", () => {
 });
 
 function addColor(e) {
+  if (mode === "none") {
+    return;
+  }
   if (e.type === "mousedown" || (e.type === "mouseover" && mouseClicked)) {
     if (mode === "fill") {
       e.target.style.backgroundColor = `rgb(${chooseColor()})`;
