@@ -79,18 +79,17 @@ function configureGridCells() {
   });
 }
 
-let mouseDown = false;
+let mouseClicked = false;
 grid.addEventListener("mousedown", () => {
-  mouseDown = true;
-});
-window.addEventListener("mouseup", () => {
-  if (mouseDown === true) {
-    mouseDown = false;
+  if (mouseClicked === false) {
+    mouseClicked = true;
+  } else if (mouseClicked === true) {
+    mouseClicked = false;
   }
 });
 
 function addColor(e) {
-  if (e.type === "mousedown" || (e.type === "mouseover" && mouseDown)) {
+  if (e.type === "mousedown" || (e.type === "mouseover" && mouseClicked)) {
     if (mode === "fill") {
       e.target.style.backgroundColor = `rgb(${chooseColor()})`;
     } else if (mode === "rainbow") {
