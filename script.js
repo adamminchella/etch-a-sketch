@@ -1,8 +1,9 @@
 const gridContainer = document.querySelector(".grid-container");
 const grid = document.querySelector(".grid");
 const reloadButton = document.querySelector(".reload");
-const rainbowButton = document.querySelector(".rainbow");
 const fillButton = document.querySelector(".fill");
+const rainbowButton = document.querySelector(".rainbow");
+const shadowButton = document.querySelector(".shadow");
 const size = document.querySelector(".slider");
 const sizeInfo = document.querySelector(".slider-text");
 let mode = "shadow";
@@ -15,6 +16,9 @@ rainbowButton.addEventListener("click", () => {
 });
 fillButton.addEventListener("click", () => {
   mode = "fill";
+});
+shadowButton.addEventListener("click", () => {
+  mode = "shadow";
 });
 
 function changeGridSize() {
@@ -44,13 +48,11 @@ function createGrid() {
 function configureGridCells() {
   const gridCells = document.querySelectorAll(".grid-cell");
   gridCells.forEach((gridCell) => {
-    gridCell.addEventListener("mouseover", (e) => {
-      addColor(gridCell, mode, e);
-    });
+    gridCell.addEventListener("mouseover", addColor);
   });
 }
 
-function addColor(gridCell, mode, e) {
+function addColor(e) {
   if (mode === "fill") {
     gridCell.setAttribute("style", "background-color: black");
   } else if (mode === "rainbow") {
@@ -65,9 +67,8 @@ function addColor(gridCell, mode, e) {
     if (e.target.style.backgroundColor === `rgb(0, 0, 0)`) {
       return;
     }
-    if (e.target.style.backgroundColor.match(/rgba/)) {
+    if (e.target.style.backgroundColor.includes("rgba")) {
       let currentShade = Number(e.target.style.backgroundColor.slice(-4, -1));
-
       if (currentShade <= 0.9) {
         currentShade = (currentShade * 10 + 1) / 10;
         e.target.style.backgroundColor = `rgba(0, 0, 0, ${currentShade}`;
