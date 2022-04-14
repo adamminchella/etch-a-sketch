@@ -11,16 +11,24 @@
     <h1>Etch-a-Sketch</h1>
     <div class="content">
       <div class="navbar">
-        <input type="color" class="color-picker" value="#212426" />
+        <div class="color-picker-container">
+          <input
+            type="color"
+            name="color-picker"
+            class="color-picker"
+            value="#212426"
+          />
+          <label for="color-picker">Pick a colour!</label>
+        </div>
         <button class="fill">Fill Mode</button>
-        <button class="rainbow">Rainbow Mode</button>
         <button class="shadow">Shadow Mode</button>
+        <button class="rainbow">Rainbow Mode</button>
         <button class="eraser">Eraser</button>
         <div class="slider-container">
           <p class="slider-text">Size: 16 X 16</p>
           <input type="range" min="1" max="64" value="16" class="slider" />
         </div>
-        <button class="reload">Clear</button>
+        <button class="reload">Reset</button>
       </div>
       <div class="grid-container">
         <div class="grid"></div>
