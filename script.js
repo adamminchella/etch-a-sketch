@@ -5,6 +5,7 @@ const colorPicker = document.querySelector(".color-picker");
 const fillButton = document.querySelector(".fill");
 const rainbowButton = document.querySelector(".rainbow");
 const shadowButton = document.querySelector(".shadow");
+const eraserButton = document.querySelector(".eraser");
 const size = document.querySelector(".slider");
 const sizeInfo = document.querySelector(".slider-text");
 let mode = "fill";
@@ -20,6 +21,9 @@ fillButton.addEventListener("click", () => {
 });
 shadowButton.addEventListener("click", () => {
   mode = "shadow";
+});
+eraserButton.addEventListener("click", () => {
+  mode = "erase";
 });
 
 colorPicker.addEventListener("click", chooseColor);
@@ -86,6 +90,8 @@ function addColor(e) {
     } else {
       e.target.style.backgroundColor = `rgba(${chooseColor()}, 0.1)`;
     }
+  } else if (mode === "erase") {
+    e.target.style.backgroundColor = `rgb(255, 255, 255)`;
   }
 }
 
