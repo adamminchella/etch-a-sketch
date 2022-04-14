@@ -119,7 +119,7 @@ function addColor(e) {
         e.target.style.backgroundColor = `rgba(${chooseColor()}, 0.1)`;
       }
     } else if (mode === "erase") {
-      e.target.style.backgroundColor = `rgb(255, 255, 255)`;
+      e.target.style.backgroundColor = `rgb(250, 250, 250)`;
     }
   }
 }
