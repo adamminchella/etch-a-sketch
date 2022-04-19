@@ -30,7 +30,10 @@ eraserButton.addEventListener("click", () => {
   mode = "erase";
 });
 
-colorPicker.addEventListener("click", chooseColor);
+colorPicker.addEventListener("click", () => {
+  chooseColor();
+  mouseClicked = false;
+});
 
 function colorButton(buttonFill, ...buttonEmpty) {
   buttonFill.classList.add("button-fill");
